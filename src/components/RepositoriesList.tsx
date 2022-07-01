@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { useDispatch } from 'react-redux';
-import { actionCreators } from "../state";
+import { useTypedSelector } from "../hooks/useTypedSelector";
+import { useActions } from "../hooks/useActions";
 
 const RepositoriesList: React.FunctionComponent = () => {
 	const [term, setTerm] = useState('');
-	const dispatch = useDispatch();
+	const { searchRepositories } = useActions();
+	const state = useTypedSelector((state: any) => state.repositories);
+	const { data, error, loading } = state;
+	console.log(data);
 
 	const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		dispatch(actionCreators.searchRepositories(term));
-	}
+		searchRepositories(term);
+	};
 
 	return (
 		<div>

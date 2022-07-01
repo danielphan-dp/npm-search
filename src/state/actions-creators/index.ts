@@ -4,7 +4,6 @@ import { ActionType } from '../action-types';
 import { Action } from '../actions';
 
 export const searchRepositories = (term: string) => {
-	console.log(term)
 	return async (dispatch: Dispatch<Action>) => {
 		dispatch({
 			type: ActionType.SEARCH_REPOSITORIES,
