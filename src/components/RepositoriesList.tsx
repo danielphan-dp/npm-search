@@ -7,7 +7,6 @@ const RepositoriesList: React.FunctionComponent = () => {
 	const { searchRepositories } = useActions();
 	const state = useTypedSelector((state: any) => state.repositories);
 	const { data, error, loading } = state;
-	console.log(data);
 
 	const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -20,6 +19,9 @@ const RepositoriesList: React.FunctionComponent = () => {
 				<input value={term} onChange={(e) => setTerm(e.target.value)}/>
 				<button>Search</button>
 			</form>
+			{error && <h3>{error}</h3>}
+			{loading && <h3>Loading...</h3>}
+			{!error && !loading && data.map((name: string) => <div key={name}>{name}</div>)}
 		</div>
 	);
 };
